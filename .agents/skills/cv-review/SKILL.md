@@ -32,15 +32,15 @@ Identify the input format and gather both visual and structural data before scor
 
 - **PDF file (local path or attached PDF):**
   - Visually inspect every page (if rendered screenshots/OCR are provided, examine both side-by-side!).
-  - When a local `.pdf` path is accessible, run the zero-dependency forensic auditor:
+  - When a local `.pdf` path is accessible and Python 3 is available, run the zero-dependency forensic auditor located inside this skill folder:
     ```bash
-    python ./scripts/audit_pdf_ats.py "<path/to/cv.pdf>"
+    python <skill_dir>/scripts/audit_pdf_ats.py "<path/to/cv.pdf>"
     ```
   - Always compare the **visual image** against the **extracted OCR/plain text** to catch hidden white-font text, broken icon-only links, letter-spaced headings (`E X P E R I E N C E`), hyphenation splits (`Pre-cision`), and A3 vs A4 page sizes.
 - **Canva design (URL, shortlink, design ID, or title):**
-  - Follow [Canva Editing Protocol](./references/canva-editing-protocol.md) (Phase 1 read-only): locate design, inspect `richtexts` coordinates/links via `start-editing-transaction` and immediately `cancel-editing-transaction`, plus export high-res PNG/PDF when checking fine alignment or ATS output.
+  - If Canva MCP tools are connected, follow [Canva Editing Protocol](./references/canva-editing-protocol.md) (Phase 1 read-only): locate design, inspect `richtexts` coordinates/links via `start-editing-transaction` and immediately `cancel-editing-transaction`, plus export high-res PNG/PDF when checking fine alignment or ATS output. If Canva MCP tools are unavailable, ask the user to export a PDF or PNG from Canva and analyze that file.
 - **Image / Screenshot (`.png`, `.jpg`, `.webp`):**
-  - Read visually via `read_file` and check typography, margins, spacing, alignment, and visible URLs.
+  - Inspect the image visually with your file/image viewer tool and check typography, margins, spacing, alignment, and visible URLs.
 - **Text / Markdown / LaTeX / Google Docs:**
   - Read the full source; if LaTeX, specifically check for `\hyphenpenalty` / hyphenation, letter-spacing macros, and page background color.
 
